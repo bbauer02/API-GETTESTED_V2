@@ -12,9 +12,13 @@ export class UsersService {
   * @param id : Prisma.UserWhereUniqueInput
   * @return Promise<User | null>
    */
-  async user( id : Prisma.UserWhereUniqueInput)  :  Promise<User | null> {
+  async user( id : Prisma.UserWhereUniqueInput)  :  Promise<Partial<User> | null> {
     return this.prisma.user.findUnique({
-      where : id
+      where : id,
+      select: {
+        id: true,
+        login: true,
+      }
     });
   }
   /*
@@ -29,7 +33,7 @@ export class UsersService {
     cursor?: Prisma.UserWhereUniqueInput;
     where?: Prisma.UserWhereInput;
     orderBy?: Prisma.UserOrderByWithRelationInput;
-  }): Promise<User[]> {
+  }): Promise<Partial<User>[]> {
     const {skip, take, cursor, where, orderBy} = params;
     return this.prisma.user.findMany({
       skip,
