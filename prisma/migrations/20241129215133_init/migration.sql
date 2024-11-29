@@ -16,6 +16,25 @@ CREATE TABLE "Country" (
 );
 
 -- CreateTable
+CREATE TABLE "Institut" (
+    "institut_id" SERIAL NOT NULL,
+    "label" TEXT NOT NULL,
+    "adress1" TEXT NOT NULL,
+    "adress2" TEXT,
+    "zipcode" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "country_id" INTEGER NOT NULL,
+    "email" TEXT NOT NULL,
+    "siteweb" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "socialNetwork" JSONB NOT NULL,
+    "stripe_id" TEXT NOT NULL,
+    "stripe_activated" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "Institut_pkey" PRIMARY KEY ("institut_id")
+);
+
+-- CreateTable
 CREATE TABLE "Role" (
     "id" SERIAL NOT NULL,
     "label" TEXT NOT NULL,
@@ -56,6 +75,9 @@ CREATE TABLE "User" (
 CREATE UNIQUE INDEX "Country_label_key" ON "Country"("label");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Institut_label_key" ON "Institut"("label");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Role_label_key" ON "Role"("label");
 
 -- CreateIndex
@@ -63,6 +85,9 @@ CREATE UNIQUE INDEX "User_login_key" ON "User"("login");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "Institut" ADD CONSTRAINT "Institut_country_fkey" FOREIGN KEY ("country_id") REFERENCES "Country"("country_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_country_fkey" FOREIGN KEY ("country_id") REFERENCES "Country"("country_id") ON DELETE RESTRICT ON UPDATE CASCADE;

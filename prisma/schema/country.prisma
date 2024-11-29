@@ -1,11 +1,12 @@
 model Country {
-  id             Int    @id @default(autoincrement()) @map("country_id")
-  label          String @unique
+  id             Int        @id @default(autoincrement()) @map("country_id")
+  label          String     @unique
   nationality    String
   language       String
   code           String
-  users          User[] @relation("userCountry")
-  nativeUsers    User[] @relation("nativeCountry")
-  nationaliUsers User[] @relation("nationality")
-  firstLangUsers User[] @relation("firstLanguage")
+  users          User[]     @relation("userCountry")
+  nativeUsers    User[]     @relation("nativeCountry")
+  nationaliUsers User[]     @relation("nationality")
+  firstLangUsers User[]     @relation("firstLanguage")
+  instituts      Institut[] @relation("institutCountry")
 }

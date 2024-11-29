@@ -1,0 +1,16 @@
+model Institut {
+  id              Int     @id @default(autoincrement()) @map("institut_id")
+  label           String  @unique
+  adress1         String
+  adress2         String?
+  zipcode         String
+  city            String
+  country         Country @relation("institutCountry", fields: [countryId], references: [id], map: "Institut_country_fkey")
+  countryId       Int     @map("country_id")
+  email           String
+  siteweb         String
+  phone           String
+  socialNetwork   Json
+  stripeId        String  @map("stripe_id")
+  stripeActivated Boolean @default(false) @map("stripe_activated")
+}
