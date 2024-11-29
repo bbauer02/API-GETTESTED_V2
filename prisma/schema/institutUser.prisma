@@ -1,0 +1,11 @@
+model InstitutUser {
+  institut    Institut @relation(fields: [institutId], references: [id])
+  institutId  Int      @map("institut_id")
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("user_id")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@id([institutId, userId])
+  @@map("institut_users")
+}

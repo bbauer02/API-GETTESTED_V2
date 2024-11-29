@@ -1,8 +1,8 @@
 model User {
-  id              String    @id @default(cuid()) @map("user_id")
+  id              String         @id @default(cuid()) @map("user_id")
   avatar          String?
-  login           String    @unique
-  email           String    @unique
+  login           String         @unique
+  email           String         @unique
   password        String
   phone           String?
   civility        Civility
@@ -13,17 +13,19 @@ model User {
   adress2         String?
   zipcode         String
   city            String
-  country         Country   @relation("userCountry", fields: [countryId], references: [id], map: "User_country_fkey")
-  countryId       Int       @map("country_id")
-  nativeCountry   Country   @relation("nativeCountry", fields: [countryId], references: [id], map: "User_nativecountry_fkey")
-  nativeCountryId Int       @map("nativecountry_id")
-  nationality     Country   @relation("nationality", fields: [countryId], references: [id], map: "User_nationality_fkey")
-  nationalityId   Int       @map("nationality_id")
-  firstLanguage   Country   @relation("firstLanguage", fields: [countryId], references: [id], map: "User_firstlanguage_fkey")
-  firstLanguageId Int       @map("firstlanguage_id")
-  birthday        DateTime? @db.Date
-  systemRole      Role      @relation("userRole", fields: [systemRoleId], references: [id], map: "User_systemrole_fkey")
-  systemRoleId    Int       @map("systemrole_id")
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  country         Country        @relation("userCountry", fields: [countryId], references: [id], map: "User_country_fkey")
+  countryId       Int            @map("country_id")
+  nativeCountry   Country        @relation("nativeCountry", fields: [countryId], references: [id], map: "User_nativecountry_fkey")
+  nativeCountryId Int            @map("nativecountry_id")
+  nationality     Country        @relation("nationality", fields: [countryId], references: [id], map: "User_nationality_fkey")
+  nationalityId   Int            @map("nationality_id")
+  firstLanguage   Country        @relation("firstLanguage", fields: [countryId], references: [id], map: "User_firstlanguage_fkey")
+  firstLanguageId Int            @map("firstlanguage_id")
+  birthday        DateTime?      @db.Date
+  systemRole      Role           @relation("userRole", fields: [systemRoleId], references: [id], map: "User_systemrole_fkey")
+  systemRoleId    Int            @map("systemrole_id")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  instituts       InstitutUser[]
+  @@map("users")
 }

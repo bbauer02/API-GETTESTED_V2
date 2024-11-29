@@ -9,4 +9,5 @@ model Country {
   nationaliUsers User[]     @relation("nationality")
   firstLangUsers User[]     @relation("firstLanguage")
   instituts      Institut[] @relation("institutCountry")
+  @@map("countries")
 }

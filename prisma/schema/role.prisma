@@ -3,4 +3,5 @@ model Role {
   label String @unique
   power Int
   users User[] @relation("userRole")
+  @@map("roles")
 }
