@@ -1,41 +1,8 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "Civility" AS ENUM ('MR', 'MRS', 'MISS');
 
-  - You are about to drop the `Country` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Institut` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Role` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Institut" DROP CONSTRAINT "Institut_country_fkey";
-
--- DropForeignKey
-ALTER TABLE "User" DROP CONSTRAINT "User_country_fkey";
-
--- DropForeignKey
-ALTER TABLE "User" DROP CONSTRAINT "User_firstlanguage_fkey";
-
--- DropForeignKey
-ALTER TABLE "User" DROP CONSTRAINT "User_nationality_fkey";
-
--- DropForeignKey
-ALTER TABLE "User" DROP CONSTRAINT "User_nativecountry_fkey";
-
--- DropForeignKey
-ALTER TABLE "User" DROP CONSTRAINT "User_systemrole_fkey";
-
--- DropTable
-DROP TABLE "Country";
-
--- DropTable
-DROP TABLE "Institut";
-
--- DropTable
-DROP TABLE "Role";
-
--- DropTable
-DROP TABLE "User";
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('Male', 'Female', 'Other');
 
 -- CreateTable
 CREATE TABLE "countries" (
@@ -71,6 +38,7 @@ CREATE TABLE "instituts" (
 CREATE TABLE "institut_users" (
     "institut_id" INTEGER NOT NULL,
     "user_id" TEXT NOT NULL,
+    "role_id" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -137,6 +105,9 @@ ALTER TABLE "institut_users" ADD CONSTRAINT "institut_users_institut_id_fkey" FO
 
 -- AddForeignKey
 ALTER TABLE "institut_users" ADD CONSTRAINT "institut_users_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "institut_users" ADD CONSTRAINT "institut_users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "User_country_fkey" FOREIGN KEY ("country_id") REFERENCES "countries"("country_id") ON DELETE RESTRICT ON UPDATE CASCADE;

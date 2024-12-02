@@ -3,5 +3,6 @@ model Role {
   label String @unique
   power Int
   users User[] @relation("userRole")
+  institutUsers InstitutUser[] // Ajout de la relation inverse
   @@map("roles")
 }
